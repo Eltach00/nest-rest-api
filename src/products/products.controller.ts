@@ -7,9 +7,11 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDTO } from './dto/createProduct.dto';
+import { UpdateProductDTO } from './dto/updateProduct.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -35,5 +37,10 @@ export class ProductsController {
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.productsService.delete(id);
+  }
+
+  @Put(':id')
+  update(@Param('id') id, @Body() updateProduct: UpdateProductDTO) {
+    return this.productsService.update(id, updateProduct);
   }
 }
